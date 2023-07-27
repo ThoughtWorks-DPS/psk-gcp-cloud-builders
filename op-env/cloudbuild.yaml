@@ -1,6 +1,7 @@
 steps:
 - name: gcr.io/cloud-builders/docker
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/op-env', '.']
+  dir: 'op-env'
 
 images: ['gcr.io/$PROJECT_ID/op-env']
 tags: ['psk-gcp-accelerator']
