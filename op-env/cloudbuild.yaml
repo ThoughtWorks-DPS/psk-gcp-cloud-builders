@@ -6,11 +6,9 @@ steps:
   dir: 'op-env'
   args: ["test/op.env"]
   secretEnv: ['OP_SERVICE_ACCOUNT_TOKEN']
-- name: 'bash'
+- name: bats/bats
   dir: 'op-env'
-  script: |
-    #!/usr/bin/env bash
-    bats test/test.bats
+  args: ["test/test.bats"]
 
 availableSecrets:
   secretManager:
