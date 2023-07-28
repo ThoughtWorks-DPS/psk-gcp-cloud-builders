@@ -6,4 +6,4 @@ RUN chmod +x /home/opuser/env.sh
 
 USER opuser
 
-ENTRYPOINT ["/builder/env.sh"]
+ENTRYPOINT ["/home/opuser/env.sh"]
