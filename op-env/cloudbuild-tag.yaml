@@ -2,28 +2,35 @@ steps:
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['pull', '$_REGISTRY/op-env:edge']
+  id: "Pull base EDGE image"
 
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['tag', '$_REGISTRY/op-env:edge:$BUILD_ID']
+  args: ['tag', '$_REGISTRY/op-env:edge', '$_REGISTRY/op-env:edge:$BUILD_ID']
+  id: "Tag with BuildID"
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['push', '$_REGISTRY/op-env:edge:$BUILD_ID']
+  id: "Push BuildID tag"
 
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['tag', '$_REGISTRY/op-env:edge', '$_REGISTRY/op-env:$TAG_NAME']
+  id: "Tag with Release Version"
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['push', '$_REGISTRY/op-env:$TAG_NAME']
+  id: "Push release version tag"
 
 
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['tag', '$_REGISTRY/op-env:edge', '$_REGISTRY/op-env:latest']
+  id: "Tag latest"
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['push', '$_REGISTRY/op-env:latest']
+  id: "Push latest tag"
 
 substitutions:
   _REGISTRY: 'us-east1-docker.pkg.dev/${PROJECT_ID}/psk-cloud-builders'

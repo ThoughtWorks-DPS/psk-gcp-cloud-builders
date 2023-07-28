@@ -1,5 +1,6 @@
 steps:
-- name: gcr.io/cloud-builders/docker
+- id: "Build container image"
+  name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['build', '-t', '$_REGISTRY/op-env:$BUILD_ID', '.']
 - name: gcr.io/cloud-builders/docker
