@@ -1,0 +1,3 @@
+#CloudBuild requires ROOT user
+ignored:
+  - DL3002

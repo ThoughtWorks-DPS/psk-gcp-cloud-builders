@@ -1,11 +1,7 @@
 FROM 1password/op:2.19.0
 
 USER root
-RUN mkdir /builder && \
-    chown -R opuser /builder
-COPY env.sh /builder/
-RUN chmod +x /builder/env.sh
+COPY env.sh /op/
+RUN chmod +x /op/env.sh
 
-USER opuser
-
-ENTRYPOINT ["/builder/env.sh"]
+ENTRYPOINT ["/op/env.sh"]

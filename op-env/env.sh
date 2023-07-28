@@ -1,2 +1,2 @@
 #!/bin/bash
-op inject -i "$1" -o "/workspace/secrets.env"
+op inject -i "$1" -o "secrets.env"
