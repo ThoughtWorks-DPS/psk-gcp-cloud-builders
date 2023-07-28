@@ -9,7 +9,7 @@ steps:
 - name: 'bash'
   dir: 'op-env'
   script: |
-    #!/usr/bin/env/bash
+    #!/bin/bash
     source /workspace/secrets.env
     echo $TEST_VAL
 
