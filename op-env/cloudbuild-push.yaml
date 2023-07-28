@@ -11,7 +11,7 @@ steps:
   args: ["test/test.bats"]
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['tag', 'gcr.io/$PROJECT_ID/op-env:$BUILD_ID', 'gcr.io/$PROJECT_ID/op-env:edge', '.']
+  args: ['tag', 'gcr.io/$PROJECT_ID/op-env:$BUILD_ID', 'gcr.io/$PROJECT_ID/op-env:edge']
 
 availableSecrets:
   secretManager:
