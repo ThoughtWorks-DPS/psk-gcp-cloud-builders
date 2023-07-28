@@ -1,7 +1,7 @@
 steps:
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/op-env', '.']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/op-env:$BUILD_ID', '.']
 - name: gcr.io/$PROJECT_ID/op-env
   dir: 'op-env'
   args: ["test/op.env"]
@@ -9,6 +9,9 @@ steps:
 - name: bats/bats
   dir: 'op-env'
   args: ["test/test.bats"]
+- name: gcr.io/cloud-builders/docker
+  dir: 'op-env'
+  args: ['tag', 'gcr.io/$PROJECT_ID/op-env:$BUILD_ID', 'gcr.io/$PROJECT_ID/op-env:edge', '.']
 
 availableSecrets:
   secretManager:
