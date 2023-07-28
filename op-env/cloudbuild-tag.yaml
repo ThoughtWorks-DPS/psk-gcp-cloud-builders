@@ -1,30 +1,30 @@
 steps:
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['pull', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge']
+  args: ['pull', '$_REGISTRY/op-env:edge']
 
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['tag', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge:$BUILD_ID']
+  args: ['tag', '$_REGISTRY/op-env:edge:$BUILD_ID']
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['push', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge:$BUILD_ID']
+  args: ['push', '$_REGISTRY/op-env:edge:$BUILD_ID']
 
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['tag', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$TAG_NAME']
+  args: ['tag', '$_REGISTRY/op-env:edge', '$_REGISTRY/op-env:$TAG_NAME']
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['push', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$TAG_NAME']
+  args: ['push', '$_REGISTRY/op-env:$TAG_NAME']
 
 
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['tag', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:latest']
+  args: ['tag', '$_REGISTRY/op-env:edge', '$_REGISTRY/op-env:latest']
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['push', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:latest']
+  args: ['push', '$_REGISTRY/op-env:latest']
 
 substitutions:
-  _REGISTRY: 'us-east1-docker.pkg.dev'
+  _REGISTRY: 'us-east1-docker.pkg.dev/${PROJECT_ID}/psk-cloud-builders'
 tags: ['psk-gcp-accelerator']
