@@ -8,7 +8,10 @@ steps:
   secretEnv: ['OP_SERVICE_ACCOUNT_TOKEN']
 - name: 'bash'
   dir: 'op-env'
-  args: ['./test.sh']
+  script: |
+    #!/usr/bin/env/bash
+    source /workspace/secrets.env
+    echo $TEST_VAL
 
 availableSecrets:
   secretManager:
