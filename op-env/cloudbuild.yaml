@@ -10,7 +10,7 @@ steps:
   dir: 'op-env'
   script: |
     #!/bin/bash
-    source /workspace/secrets.env
+    source /workspace/op-env/secrets.env
     echo $TEST_VAL
 
 availableSecrets:
