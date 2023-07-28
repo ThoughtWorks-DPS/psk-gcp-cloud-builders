@@ -1,0 +1,30 @@
+steps:
+- name: gcr.io/cloud-builders/docker
+  dir: 'op-env'
+  args: ['pull', '$REGISTRY/op-env:edge']
+
+- name: gcr.io/cloud-builders/docker
+  dir: 'op-env'
+  args: ['tag', '$REGISTRY/op-env:edge:$BUILD_ID']
+- name: gcr.io/cloud-builders/docker
+  dir: 'op-env'
+  args: ['push', '$REGISTRY/op-env:edge:$BUILD_ID']
+
+- name: gcr.io/cloud-builders/docker
+  dir: 'op-env'
+  args: ['tag', '$REGISTRY/op-env:edge', '$REGISTRY/op-env:$TAG_NAME']
+- name: gcr.io/cloud-builders/docker
+  dir: 'op-env'
+  args: ['push', '$REGISTRY/op-env:$TAG_NAME']
+
+
+- name: gcr.io/cloud-builders/docker
+  dir: 'op-env'
+  args: ['tag', '$REGISTRY/op-env:edge', '$REGISTRY/op-env:latest']
+- name: gcr.io/cloud-builders/docker
+  dir: 'op-env'
+  args: ['push', '$REGISTRY/op-env:latest']
+
+substitutions:
+  REGISTRY: 'us-east1-docker.pkg.dev/$PROJECT_ID/psk-cloud-builders'
+tags: ['psk-gcp-accelerator']
