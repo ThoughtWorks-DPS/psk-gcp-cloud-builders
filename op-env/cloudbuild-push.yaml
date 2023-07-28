@@ -3,20 +3,25 @@ steps:
   name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['build', '-t', '$_REGISTRY/op-env:$BUILD_ID', '.']
-- name: gcr.io/cloud-builders/docker
+- id: "Push container image"
+  name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['push', '$_REGISTRY/op-env:$BUILD_ID']
-- name: $_REGISTRY/op-env:$BUILD_ID
+- id: "Execute secret substitution with image"
+  name: $_REGISTRY/op-env:$BUILD_ID
   dir: 'op-env'
   args: ["test/op.env"]
   secretEnv: ['OP_SERVICE_ACCOUNT_TOKEN']
-- name: bats/bats
+- id: "Run BATS test"
+  name: bats/bats
   dir: 'op-env'
   args: ["test/test.bats"]
-- name: gcr.io/cloud-builders/docker
+- id: "Tag image EDGE"
+  name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['tag', '$_REGISTRY/op-env:$BUILD_ID', '$_REGISTRY/op-env:edge']
-- name: gcr.io/cloud-builders/docker
+- id: "Push EDGE tag"
+  name: gcr.io/cloud-builders/docker
   dir: 'op-env'
   args: ['push', '$_REGISTRY/op-env:edge']
 
