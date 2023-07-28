@@ -1,11 +1,11 @@
 steps:
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['build', '-t', '$REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$BUILD_ID', '.']
+  args: ['build', '-t', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$BUILD_ID', '.']
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['push', '$REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$BUILD_ID']
-- name: $REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$BUILD_ID
+  args: ['push', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$BUILD_ID']
+- name: $_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$BUILD_ID
   dir: 'op-env'
   args: ["test/op.env"]
   secretEnv: ['OP_SERVICE_ACCOUNT_TOKEN']
@@ -14,15 +14,15 @@ steps:
   args: ["test/test.bats"]
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['tag', '$REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$BUILD_ID', '$REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge']
+  args: ['tag', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:$BUILD_ID', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge']
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['push', '$REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge']
+  args: ['push', '$_REGISTRY/$PROJECT_ID/psk-cloud-builders/op-env:edge']
 
 availableSecrets:
   secretManager:
   - versionName: projects/$PROJECT_ID/secrets/OP_SERVICE_ACCOUNT_TOKEN/versions/latest
     env: 'OP_SERVICE_ACCOUNT_TOKEN'
 substitutions:
-  REGISTRY: 'us-east1-docker.pkg.dev'
+  _REGISTRY: 'us-east1-docker.pkg.dev'
 tags: ['psk-gcp-accelerator']
