@@ -6,11 +6,11 @@ steps:
 
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['tag', '$_REGISTRY/op-env:edge', '$_REGISTRY/op-env:edge:$BUILD_ID']
+  args: ['tag', '$_REGISTRY/op-env:edge', '$_REGISTRY/op-env:$BUILD_ID']
   id: "Tag with BuildID"
 - name: gcr.io/cloud-builders/docker
   dir: 'op-env'
-  args: ['push', '$_REGISTRY/op-env:edge:$BUILD_ID']
+  args: ['push', '$_REGISTRY/op-env:$BUILD_ID']
   id: "Push BuildID tag"
 
 - name: gcr.io/cloud-builders/docker
